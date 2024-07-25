@@ -2,6 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
+import morgan from "morgan";
 
 import UserRoutes from "./routes/userRoute";
 
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.use(morgan("common"));
 app.use("/api/user", UserRoutes);
 
 app.listen(7000, () => {

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     auth0Id: { type: String, required: true },
-    name: { type: String, required: true },
+    name: { type: String },
     email: { type: String, required: true, match: /.+\@.+\..+/ },
     addressLine1: String,
     city: String,

@@ -23,4 +23,32 @@ export = {
       });
     }
   },
+
+  updateCurrentUser: async (req: Request, res: Response) => {
+    try {
+      const { name, addressLine1, city } = req.body;
+      const user = await User.findById(req.userId);
+
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      user.name = name;
+      user.addressLine1 = addressLine1;
+      user.city = city;
+
+      await user.save();
+
+      res.send(user);
+    } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({
+        success: false,
+        message: "Error updating user",
+      });
+    }
+  },
 };

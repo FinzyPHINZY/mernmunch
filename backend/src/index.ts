@@ -1,7 +1,9 @@
-import express, { Request, Response } from "express";
-import cors from "cors";
 import "dotenv/config";
+import cors from "cors";
+import express from "express";
 import mongoose from "mongoose";
+
+import UserRoutes from "./routes/userRoute";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -14,9 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello World!" });
-});
+app.use("/api/user", UserRoutes);
 
 app.listen(7000, () => {
   console.log(`server running on http://localhost:7000/ ...betta go catch it`);

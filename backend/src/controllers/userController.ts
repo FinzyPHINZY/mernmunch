@@ -2,6 +2,22 @@ import { Request, Response } from "express";
 import User from "../models/user";
 
 export = {
+  getCurrentUser: async (req: Request, res: Response) => {
+    try {
+      const currentUser = await User.findOne({ _id: req.userId });
+      if (!currentUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json(currentUser);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+      });
+    }
+  },
   createCurrentUser: async (req: Request, res: Response) => {
     try {
       const { auth0Id } = req.body;

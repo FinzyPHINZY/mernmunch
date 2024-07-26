@@ -1,6 +1,6 @@
 import "dotenv/config";
 import cors from "cors";
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 
@@ -17,6 +17,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("common"));
+
+app.get("/health", (req: Request, res: Response) => {
+  res.send({ message: "health ok!" });
+});
 app.use("/api/user", UserRoutes);
 
 app.listen(7000, () => {

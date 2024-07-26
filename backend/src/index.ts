@@ -6,6 +6,8 @@ import morgan from "morgan";
 
 import UserRoutes from "./routes/userRoute";
 
+const PORT = process.env.PORT || 7000;
+
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
   .then(() =>
@@ -23,6 +25,6 @@ app.get("/health", (req: Request, res: Response) => {
 });
 app.use("/api/user", UserRoutes);
 
-app.listen(7000, () => {
+app.listen(PORT, () => {
   console.log(`server running on http://localhost:7000/ ...betta go catch it`);
 });

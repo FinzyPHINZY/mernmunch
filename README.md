@@ -1,14 +1,3 @@
-nodejs
-express
-typescript
-mongoose
-mongodb
-tailwindcss
-shadcn component library
-react
-react query
-Here's a detailed README for the MERNMunch project:
-
 # MERNMunch
 
 MERNMunch is a food delivery application built with the MERN stack (MongoDB, Express.js, React, and Node.js). The project aims to provide users with a seamless experience for browsing and ordering food from various restaurants. The project also used TailwindCSS, TypeScript, Mongoose, React Query, Shadcn Component Library for efficient styling, type safety, database modeling, state management, and user interface components, respectively.

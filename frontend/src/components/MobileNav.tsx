@@ -38,7 +38,7 @@ const MobileNav = () => {
             ) : (
               <Button
                 className="flex-1 font-bold bg-orange-500"
-                onClick={() => loginWithRedirect()}
+                onClick={async () => await loginWithRedirect()}
               >
                 Log In
               </Button>

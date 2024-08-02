@@ -44,7 +44,7 @@ export const jwtParse = async (
 
     next();
   } catch (error) {
-    console.error(error);
+    console.error("failed to parse jwt", error);
 
     return res.status(401);
   }

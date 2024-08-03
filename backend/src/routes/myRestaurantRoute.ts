@@ -1,5 +1,5 @@
 import express from "express";
-import restaurantController from "../controllers/restaurantController";
+import restaurantController from "../controllers/myRestaurantController";
 import { upload } from "../middleware/multer";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateMyRestaurantRequest } from "../middleware/validation";

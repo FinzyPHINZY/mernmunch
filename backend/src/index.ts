@@ -3,7 +3,8 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 import UserRoutes from "./routes/userRoute";
-import RestaurantRoutes from "./routes/restaurantRoute";
+import myRestaurantRoutes from "./routes/myRestaurantRoute";
+import RestaurantRoutes from "./routes/RestaurantRoute";
 import connectDB from "./config/database";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -28,7 +29,8 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.use("/api/user", UserRoutes);
-app.use("/api/restaurant", RestaurantRoutes);
+app.use("/api/restaurant", myRestaurantRoutes);
+app.use("/api/restaurants", RestaurantRoutes);
 
 app.listen(PORT, () => {
   console.log(`server running on http://localhost:7000/ ...betta go catch it`);

@@ -23,3 +23,12 @@ export type Restaurant = {
   menuItems: MenuItem[];
   imageUrl: string;
 };
+
+export type RestaurantSeachResponse = {
+  data: Restaurant[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

@@ -20,4 +20,15 @@ router.post(
   restaurantController.createResturant
 );
 
+// desc          Fetch restaurant data
+// route         PUT /api/restaurant/
+router.put(
+  "/",
+  upload.single("imageFile"),
+  validateMyRestaurantRequest,
+  jwtCheck,
+  jwtParse,
+  restaurantController.updateRestaurant
+);
+
 export default router;

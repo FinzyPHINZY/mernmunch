@@ -1,7 +1,7 @@
 import useCreateMyRestaurant, {
   useGetMyRestaurant,
   useUpdateMyRestaurant,
-} from "../api/RestaurantApi";
+} from "../api/MyRestaurantApi";
 import ManageRestaurantForm from "../forms/manage-restaurant-form/ManageRestaurantForm";
 
 const ManageRestaurantPage = () => {

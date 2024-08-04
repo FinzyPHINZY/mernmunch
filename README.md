@@ -19,6 +19,9 @@ MERNMunch is a food delivery application built with the MERN stack (MongoDB, Exp
 - Add items to cart and place orders
 - Responsive design with ShadCN components
 - User profile management
+- Restaurant profile management
+- Pagination
+- Filtering and Sorting
 
 ## Tech Stack
 

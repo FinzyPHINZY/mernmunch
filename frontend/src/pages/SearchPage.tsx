@@ -4,22 +4,33 @@ import SearchResultInfo from "../components/SearchResultInfo";
 import SearchResultCard from "../components/SearchResultCard";
 import { useState } from "react";
 import SearchBar, { SearchForm } from "../components/SearchBar";
+import PaginatorSelector from "../components/PaginatorSelector";
 
 export type SearchState = {
   searchQuery: string;
+  page: number;
 };
 
 const SearchPage = () => {
   const { city } = useParams();
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: "",
+    page: 1,
   });
   const { results, isLoading } = useSearchRestaurants(searchState, city);
+
+  const setPage = (page: number) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      page,
+    }));
+  };
 
   const setSearchQuery = (searchFormData: SearchForm) => {
     setSearchState((prevState) => ({
       ...prevState,
       searchQuery: searchFormData.searchQuery,
+      page: 1,
     }));
   };
 
@@ -27,6 +38,7 @@ const SearchPage = () => {
     setSearchState((prevState) => ({
       ...prevState,
       searchQuery: "",
+      page: 1,
     }));
   };
 
@@ -41,7 +53,7 @@ const SearchPage = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
       <div className="" id="cuisines-list">
-        Insert cuisines here:
+        Filter by cuisine:
       </div>
       <div className="flex flex-col gap-5" id="main-content">
         <SearchBar
@@ -54,6 +66,11 @@ const SearchPage = () => {
         {results.data.map((restaurant) => (
           <SearchResultCard restaurant={restaurant} />
         ))}
+        <PaginatorSelector
+          page={results.pagination.page}
+          pages={results.pagination.pages}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );

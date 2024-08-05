@@ -2,6 +2,7 @@ import landingImage from "../assets/landing.png";
 import appDownloadImage from "../assets/appDownload.png";
 import SearchBar, { SearchForm } from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -9,7 +10,17 @@ const HomePage = () => {
     navigate({
       pathname: `/search/${searchFormValues.searchQuery}`,
     });
+
+    setSearchState((prevState) => ({
+      ...prevState,
+      searchQuery: searchFormValues.searchQuery,
+      page: 1,
+    }));
   };
+
+  const [searchState, setSearchState] = useState<SearchForm>({
+    searchQuery: "",
+  });
 
   return (
     <div className="flex flex-col gap-12">
@@ -23,6 +34,7 @@ const HomePage = () => {
         <SearchBar
           onSubmit={handleSearchSubmit}
           placeholder="Search by City or Town"
+          searchQuery={searchState.searchQuery}
         />
       </div>
       <div className="grid md:grid-cols-2 gap-5">

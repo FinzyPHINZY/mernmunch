@@ -54,3 +54,9 @@ export const validateParameters = param("city")
   .trim()
   .notEmpty()
   .withMessage("City parameter must be a valid string");
+
+export const validateRestaurantId = param("restaurantId")
+  .isString()
+  .trim()
+  .notEmpty()
+  .withMessage("Restaurant id must be a valid string");

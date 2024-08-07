@@ -28,6 +28,10 @@ app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
 
 app.use(express.json());
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello, this is the MernMunch Backend server!");
+});
+
 app.get("/health", (req: Request, res: Response) => {
   res.send({ message: "health ok!" });
 });
@@ -38,5 +42,7 @@ app.use("/api/restaurants", RestaurantRoutes);
 app.use("/api/order", orderRoute);
 
 app.listen(PORT, () => {
-  console.log(`server running on http://localhost:7000/ ...betta go catch it`);
+  console.log(
+    `server running on http://localhost:${PORT}/ ...betta go catch it`
+  );
 });

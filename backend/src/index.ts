@@ -21,9 +21,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-app.use(express.json());
 app.use(cors());
 app.use(morgan("common"));
+
+app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
+
+app.use(express.json());
 
 app.get("/health", (req: Request, res: Response) => {
   res.send({ message: "health ok!" });

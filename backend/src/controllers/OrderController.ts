@@ -5,6 +5,7 @@ import Order from "../models/order";
 
 const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
 const FRONTEND_URL = process.env.FRONTEND_URL as string;
+const STRIPE_ENDPOINT_SECRET = process.env.STRIPE_WEBHOOK_SECRET as string;
 
 type CheckoutSessionRequest = {
   cartItems: {
@@ -72,11 +73,35 @@ export = {
   },
 
   stripeWebhookHandler: async (req: Request, res: Response) => {
-    console.log("RECEIVED EVENT");
-    console.log("==============");
-    console.log("event: ", req.body);
+    let event;
+    try {
+      const signature = req.headers["stripe-signature"];
+      event = STRIPE.webhooks.constructEvent(
+        req.body,
+        signature as string,
+        STRIPE_ENDPOINT_SECRET
+      );
+    } catch (error: any) {
+      console.error("Error: ", error);
+      return res.status(400).send(`Error processing webhook: ${error.message}`);
+    }
 
-    res.send();
+    if (event.type === "checkout.session.completed") {
+      const order = await Order.findById(event.data.object.metadata?.orderId);
+
+      if (!order) {
+        return res.status(404).json({
+          success: false,
+          message: "Order not found",
+        });
+      }
+
+      order.totalAmount = event.data.object.amount_total;
+      order.status = "paid";
+
+      await order.save();
+    }
+    res.status(200).send();
   },
 };
 

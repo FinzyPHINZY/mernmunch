@@ -49,7 +49,7 @@ export = {
 
       const session = await createSession(
         lineItems,
-        "TEST_ORDER_ID",
+        newOrder._id.toString(),
         restaurant.deliveryPrice,
         restaurant._id.toString()
       );
@@ -69,6 +69,14 @@ export = {
         message: `Error creating checkout session: ${error.raw.message}`,
       });
     }
+  },
+
+  stripeWebhookHandler: async (req: Request, res: Response) => {
+    console.log("RECEIVED EVENT");
+    console.log("==============");
+    console.log("event: ", req.body);
+
+    res.send();
   },
 };
 

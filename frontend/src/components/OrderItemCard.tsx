@@ -23,6 +23,10 @@ const OrderItemCard = ({ order }: Props) => {
 
   const [status, setStatus] = useState<OrderStatus>(order.status);
 
+  useEffect(() => {
+    setStatus(order.status);
+  }, [order.status]);
+
   const handleStatusChange = async (newStatus: OrderStatus) => {
     await updateRestaurantStatus({
       orderId: order._id as string,

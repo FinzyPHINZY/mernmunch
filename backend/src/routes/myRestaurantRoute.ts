@@ -10,13 +10,22 @@ const router = express.Router();
 // route         GET /api/restaurant/
 router.get("/", jwtCheck, jwtParse, restaurantController.getRestaurant);
 
-// desc          Fetch restaurant data
+// desc          Fetch orders
 // route         GET /api/restaurant/
 router.get(
   "/order",
   jwtCheck,
   jwtParse,
   myRestaurantController.getMyRestaurant
+);
+
+// desc          Update orders status
+// route         PATCH /api/restaurant/
+router.patch(
+  "/order/:orderId/status",
+  jwtCheck,
+  jwtParse,
+  myRestaurantController.updateOrderStatus
 );
 
 // desc          Create a new restaurant

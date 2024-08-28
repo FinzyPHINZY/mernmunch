@@ -99,7 +99,6 @@ export = {
       order.totalAmount = event.data.object.amount_total;
       order.status = "paid";
 
-      console.log(order);
       await order.save();
     }
     res.status(200).send();

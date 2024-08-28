@@ -8,6 +8,18 @@ const MobileNavLInks = () => {
     <>
       <Link
         className="flex bg-white items-center font-bold hover:text-orange-500"
+        to="/order-status"
+      >
+        Order Status
+      </Link>
+      <Link
+        className="flex bg-white items-center font-bold hover:text-orange-500"
+        to="/manage-restaurant"
+      >
+        My Restaurant
+      </Link>
+      <Link
+        className="flex bg-white items-center font-bold hover:text-orange-500"
         to="/user-profile"
       >
         User Profile

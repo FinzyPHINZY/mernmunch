@@ -3,11 +3,21 @@ import restaurantController from "../controllers/myRestaurantController";
 import { upload } from "../middleware/multer";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateMyRestaurantRequest } from "../middleware/validation";
+import myRestaurantController from "../controllers/myRestaurantController";
 const router = express.Router();
 
 // desc          Fetch restaurant data
 // route         GET /api/restaurant/
 router.get("/", jwtCheck, jwtParse, restaurantController.getRestaurant);
+
+// desc          Fetch restaurant data
+// route         GET /api/restaurant/
+router.get(
+  "/order",
+  jwtCheck,
+  jwtParse,
+  myRestaurantController.getMyRestaurant
+);
 
 // desc          Create a new restaurant
 // route         POST /api/restaurant/
